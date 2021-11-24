@@ -1,6 +1,7 @@
 # Jira
 
 https://www.youtube.com/watch?v=vbXuHi1kMOo&list=PL5FIFxLsMtxTTxwZ3D86ymwUSZl7YR_Tr
+code : https://github.com/fefuns/jira
 
 ## React 项目初始化
 
