@@ -21,3 +21,8 @@ yarn add eslint-config-prettier
 ```
 
 - 代码提交检查： [commitlint](https://github.com/conventional-changelog/commitlint)
+
+- 本地 Node 服务器：
+  - [json-server](https://github.com/typicode/json-server)
+  -
+-
