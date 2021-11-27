@@ -1,6 +1,7 @@
 # Jira
 
 https://www.youtube.com/watch?v=vbXuHi1kMOo&list=PL5FIFxLsMtxTTxwZ3D86ymwUSZl7YR_Tr
+
 code : https://github.com/fefuns/jira
 
 ## React 项目初始化
@@ -25,5 +26,6 @@ yarn add eslint-config-prettier
 
 - 本地 Node 服务器：
   - [json-server](https://github.com/typicode/json-server)
-  -
+- 前端本地模拟后端： [Service Worker API](https://developer.mozilla.org/zh-CN/docs/Web/API/Service_Worker_API)
+  - 本项目后端模拟： npx imooc-jira-tool
 -

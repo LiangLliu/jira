@@ -14,9 +14,10 @@ export const ProjectListScreen = () => {
     personId: "",
   });
 
-  const debounceParam = useDebounce(param, 200);
+  const debounceParam = useDebounce(param, 5000);
   const [list, setList] = useState([]);
   const [users, setUsers] = useState([]);
+
   useEffect(() => {
     fetch(`${apiUrl}/projects?${stringify(cleanObject(debounceParam))}`).then(
       async (res) => {
