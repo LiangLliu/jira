@@ -28,6 +28,9 @@ yarn add eslint-config-prettier
   - [json-server](https://github.com/typicode/json-server)
 - 前端本地模拟后端： [Service Worker API](https://developer.mozilla.org/zh-CN/docs/Web/API/Service_Worker_API)
   - 本项目后端模拟： npx imooc-jira-tool
+- 组件库：
+  - Antd : [https://ant.design](https://ant.design)
+  - Emotion : [https://emotion.sh/docs/introduction](https://emotion.sh/docs/introduction)
 
 ## 使用 Context 存储信息
 
