@@ -1,5 +1,7 @@
-import React, { ReactNode, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import * as auth from "auth-provider";
+import { http } from "utils/http";
+import { useMount } from "utils";
 import { User } from "../screans/project-list/search-panel";
 
 interface AuthForm {
@@ -7,26 +9,35 @@ interface AuthForm {
   password: string;
 }
 
-const AuthContext = React.createContext<
+const bootstarpUser = async () => {
+  let user = null;
+  const token = auth.getToken();
+  if (token) {
+    const data = await http("me", { token });
+    user = data.user;
+  }
+  return user;
+};
+const AuthContext = createContext<
   | {
       user: User | null;
-      login: (form: AuthForm) => Promise<void>;
       register: (form: AuthForm) => Promise<void>;
+      login: (form: AuthForm) => Promise<void>;
       logout: () => Promise<void>;
     }
   | undefined
 >(undefined);
-
 AuthContext.displayName = "AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, serUser] = useState<User | null>(null);
-
-  // point free
-  const login = (form: AuthForm) => auth.login(form).then(serUser);
-  const register = (form: AuthForm) => auth.register(form).then(serUser);
-  const logout = () => auth.logout().then(() => serUser(null));
-
+  const [user, setUser] = useState<User | null>(null);
+  // const login = (form: AuthForm) => auth.login(form).then(user => setUser(user)); 简写为如下 point free
+  const login = (form: AuthForm) => auth.login(form).then(setUser);
+  const register = (form: AuthForm) => auth.register(form).then(setUser);
+  const logout = () => auth.logout().then(() => setUser(null));
+  useMount(() => {
+    bootstarpUser().then(setUser);
+  });
   return (
     <AuthContext.Provider
       children={children}
@@ -36,9 +47,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useAuth = () => {
-  const context = React.useContext(AuthContext);
+  const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth 必须在AuthProvider中使用");
+    throw new Error("useAuth 必须在 provider 中使用");
+  } else {
+    return context;
   }
-  return context;
 };
