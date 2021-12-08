@@ -2,7 +2,7 @@
 
 https://www.youtube.com/watch?v=vbXuHi1kMOo&list=PL5FIFxLsMtxTTxwZ3D86ymwUSZl7YR_Tr
 
-code : https://github.com/fefuns/jira
+code : https://github.com/sindu12jun/imooc-jira
 
 ## React 项目初始化
 
@@ -33,6 +33,7 @@ yarn add eslint-config-prettier
   - Emotion : [https://emotion.sh/docs/introduction](https://emotion.sh/docs/introduction)
 - 工具库：
   - 时间处理： dayjs
+  - 检测页面渲染异常的原因 : why-did-you-render
 
 ## 使用 Context 存储信息
 
