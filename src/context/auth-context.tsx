@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext } from "react";
 import * as auth from "auth-provider";
 import { http } from "utils/http";
 import { useMount } from "utils";
@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     error,
     isLoading,
     isIdle,
-    isSuccess,
     run,
     isError,
     setData: setUser,

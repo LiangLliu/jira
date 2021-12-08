@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
 type FailBackRender = (props: { error: Error | null }) => React.ReactElement;
 
