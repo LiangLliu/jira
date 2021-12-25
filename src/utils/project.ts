@@ -1,17 +1,23 @@
-import { useAsync } from "./use-async";
-import { Project } from "../screans/project-list/list";
+import { useAsync } from "utils/use-async";
+
 import { useEffect } from "react";
+
+import { useHttp } from "utils/http";
+import { Project } from "../screans/project-list/list";
 import { cleanObject } from "./index";
-import { useHttp } from "./http";
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
   const { run, ...result } = useAsync<Project[]>();
 
-  useEffect(() => {
-    run(client("projects", { data: cleanObject(param || {}) }));
+  const fetchProjects = () =>
+    client("projects", { data: cleanObject(param || {}) });
 
-    // eslint-disable-next-line  react-hooks/exhaustive-deps
+  useEffect(() => {
+    run(fetchProjects(), {
+      retry: fetchProjects,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [param]);
 
   return result;
@@ -19,9 +25,7 @@ export const useProjects = (param?: Partial<Project>) => {
 
 export const useEditProject = () => {
   const { run, ...asyncResult } = useAsync();
-
   const client = useHttp();
-
   const mutate = (params: Partial<Project>) => {
     return run(
       client(`projects/${params.id}`, {
@@ -30,7 +34,6 @@ export const useEditProject = () => {
       })
     );
   };
-
   return {
     mutate,
     ...asyncResult,
@@ -39,9 +42,7 @@ export const useEditProject = () => {
 
 export const useAddProject = () => {
   const { run, ...asyncResult } = useAsync();
-
   const client = useHttp();
-
   const mutate = (params: Partial<Project>) => {
     return run(
       client(`projects/${params.id}`, {
@@ -50,7 +51,6 @@ export const useAddProject = () => {
       })
     );
   };
-
   return {
     mutate,
     ...asyncResult,
